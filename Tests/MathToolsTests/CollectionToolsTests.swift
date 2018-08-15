@@ -10,87 +10,52 @@ import MathTools
 
 class CollectionToolsTests: XCTestCase {
     
-    func testThatNormalized_forEmptyArray_willReturnsEmptyArray() {
+  
+    func testThatSum_forEmptyArray_willReturnZero() {
+        let expectedValue: Double = 0
         
+        let value = [Double]().sum()
         
-        let expectedArray: [Double] = []
-        let arrayToNormalize: [Double] = []
-        
-        let normalizedArray = arrayToNormalize.normalized()
-        
-        XCTAssertEqual(normalizedArray, expectedArray)
+        XCTAssertEqual(value, expectedValue)
     }
     
-    func testThatNormalized_forArrayWithTheSameValues_willReturnsArrayWithOnlyZeros() {
+    func testThatSum_forNotEmptyArray_willReturnSum() {
+        let expectedValue: Double = 17
         
+        let value = [10.0, 2.0, 5.0].sum()
         
-        let expectedArray = [0.0, 0.0, 0.0, 0.0]
-        let arrayToNormalize = [100.0, 100.0, 100.0, 100.0]
-        
-        let normalizedArray = arrayToNormalize.normalized()
-        
-        XCTAssertEqual(normalizedArray, expectedArray)
+        XCTAssertEqual(value, expectedValue)
     }
     
-    func testThatNormalized_forArrayWithDifferentValues_willReturnsArrayWithCorrectValues() {
-        
-        
-        let expectedArray = [1.0, 0.5, 0.25, 0.0]
-        let arrayToNormalize = [100.0, 50.0, 25.0, 0.0]
-        
-        let normalizedArray = arrayToNormalize.normalized()
-        
-        XCTAssertEqual(normalizedArray, expectedArray)
+    func testThatMean_forEmptyArray_willReturnNaN() {
+        let value = [Double]().mean()
+        XCTAssertTrue(value.isNaN)
     }
     
-    func testThatStandardScoreNormalized_forEmptyArray_willReturnsEmptyArray() {
+    func testThatMean_forNonEmptyArray_willReturnMeanOfAllValues() {
+        let expectedValue: Double = 5
         
+        let value = [10.0, 2.0, 5.0, 3.0].mean()
         
-        let expectedArray: [Double] = []
-        let arrayToNormalize: [Double] = []
-        
-        let normalizedArray = arrayToNormalize.standardScoreNormalized()
-        
-        XCTAssertEqual(normalizedArray, expectedArray)
+        XCTAssertEqual(value, expectedValue)
     }
     
-    func testThatStandardScoreNormalized_forArrayWithTheSameValues_willReturnsArrayWithOnlyZeros() {
+    func testThatVariance_forNonEptyArray_willReturnVarinaceOfAllValues() {
+        let expectedValue: Double = 21704
         
+        let value = [206.0, 76.0, -224.0, 36.0, -94.0].variance()
         
-        let expectedArray = [0.0, 0.0, 0.0, 0.0]
-        let arrayToNormalize = [100.0, 100.0, 100.0, 100.0]
-        
-        let normalizedArray = arrayToNormalize.standardScoreNormalized()
-        
-        XCTAssertEqual(normalizedArray, expectedArray)
+        XCTAssertEqual(value, expectedValue)
     }
-    
-    func testThatStandardScoreNormalized_forArrayWithDifferentValues_willReturnsArrayWithCorrect() {
-        
-        
-        let expectedArray = [-0.38596489, -0.10526315,  0.24561402,  0.24561402]
-        let arrayToNormalize = [1.0, 5.0, 10.0, 10.0]
-        
-        let normalizedArray = arrayToNormalize.standardScoreNormalized()
-        
-        zip(normalizedArray, expectedArray).forEach { (touple) in
-            let (value, expected) = touple
-            XCTAssertEqual(value, expected, accuracy: 0.00000001)
-        }
-        
-        
-        
-    }
-    
 }
 
 extension CollectionToolsTests {
     static var allTests = [
-        ("testThatNormalized_forEmptyArray_willReturnsEmptyArray", testThatNormalized_forEmptyArray_willReturnsEmptyArray),
-        ("testThatNormalized_forArrayWithTheSameValues_willReturnsArrayWithOnlyZeros", testThatNormalized_forArrayWithTheSameValues_willReturnsArrayWithOnlyZeros),
-        ("testThatNormalized_forArrayWithDifferentValues_willReturnsArrayWithCorrectValues", testThatNormalized_forArrayWithDifferentValues_willReturnsArrayWithCorrectValues),
-        ("testThatStandardScoreNormalized_forEmptyArray_willReturnsEmptyArray", testThatStandardScoreNormalized_forEmptyArray_willReturnsEmptyArray),
-        ("testThatStandardScoreNormalized_forArrayWithTheSameValues_willReturnsArrayWithOnlyZeros", testThatStandardScoreNormalized_forArrayWithTheSameValues_willReturnsArrayWithOnlyZeros),
-        ("testThatStandardScoreNormalized_forArrayWithDifferentValues_willReturnsArrayWithCorrect", testThatStandardScoreNormalized_forArrayWithDifferentValues_willReturnsArrayWithCorrect),
-        ]
+        ("testThatSum_forEmptyArray_willReturnZero", testThatSum_forEmptyArray_willReturnZero),
+        ("testThatSum_forNotEmptyArray_willReturnSum", testThatSum_forNotEmptyArray_willReturnSum),
+        ("testThatMean_forEmptyArray_willReturnNaN", testThatMean_forEmptyArray_willReturnNaN),
+        ("testThatMean_forNonEmptyArray_willReturnMeanOfAllValues", testThatMean_forNonEmptyArray_willReturnMeanOfAllValues),
+        ("testThatVariance_forNonEptyArray_willReturnVarinaceOfAllValues", testThatVariance_forNonEptyArray_willReturnVarinaceOfAllValues),
+        ("testThatVariance_forNonEptyArray_willReturnVarinaceOfAllValues", testThatVariance_forNonEptyArray_willReturnVarinaceOfAllValues)
+    ]
 }
